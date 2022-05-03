@@ -11,8 +11,8 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "console": "integratedTerminal",
-            //"stopOnEntry": true
+            "cwd": "${workspaceFolder}",
+            "console": "externalTerminal"
         }
     ]
 }
