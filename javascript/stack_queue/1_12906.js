@@ -4,7 +4,7 @@ function solution(arr) {
     // 스택 생성
     const stackArr = [arr[0]];
 
-    for (num of arr) {
+    for (const num of arr) {
         // 새로 들어온 숫자가 스택의 마지막 요소와 같으면 
         // 스택의 마지막 요소를 pop하고 새로 들어온 숫자를 push한다.
         if (stackArr[stackArr.length - 1] === num) {
