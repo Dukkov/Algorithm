@@ -22,6 +22,8 @@
 
 function solution(s) {
     let cnt = 0;
+    // 입력 s를 순회하며 "("가 나왔을 때는 cnt를 증가시키고 ")"가 나오면 cnt를 감소시킨다.
+    // "(" 보다 ")" 가 많이 나왔을 경우 cnt는 음수가 되며, 올바르지 않은 괄호이다.
     for (let i = 0; i < s.length; i++) {
         if (s[i] === "(")
             cnt++;
@@ -30,6 +32,7 @@ function solution(s) {
         if (cnt < 0)
             return (false);
     }
+    // 순회가 끝난 뒤 cnt를 체크해서 0이 아닌경우 "("과 ")"의 갯수가 다른것이므로 올바르지 않은 괄호이다.
     if (cnt)
         return (false);
     return (true);
