@@ -34,10 +34,6 @@ function solution(scoville, K) {
             else
                 break;
         }
-
-        if () {
-
-        }
         return (arr);
     };
 }
