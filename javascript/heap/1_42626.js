@@ -1,39 +1,64 @@
 // 더 맵게
 // https://school.programmers.co.kr/learn/courses/30/lessons/42626
+class MinHeap {
+	constructor() {
+		this.heap = [null];
+	}
+
+	getHeapSize() {
+		return this.heap.length;
+	}
+
+	getHeapRoot() {
+		return this.heap[1];
+	}
+
+	heapPush(element) {
+		this.heap.push(element);
+		let elementIdx = this.heap.length - 1;
+		let parentIdx = Math.floor(elementIdx / 2);
+
+		while (parentIdx > 0 && this.heap[parentIdx] > this.heap[elementIdx]) {
+			[this.heap[parentIdx], this.heap[elementIdx]] = [this.heap[elementIdx], this.heap[parentIdx]];
+			elementIdx = parentIdx;
+			parentIdx = Math.floor(elementIdx / 2);
+		}
+	}
+
+	heapPop() {
+		const root = this.heap[1];
+		this.heap[1] = this.heap.pop();
+		
+		let currentIdx = 1;
+		let [left, right] = [2*currentIdx, 2*currentIdx + 1];
+		let currentChildIdx = this.heap[right] && this.heap[right] < this.heap[left] ? right : left;
+	
+		while (this.heap[currentChildIdx] && this.heap[currentIdx] > this.heap[currentChildIdx]) {
+			[this.heap[currentChildIdx], this.heap[currentIdx]] = [this.heap[currentIdx], this.heap[currentChildIdx]];
+			currentIdx = currentChildIdx;
+			[left, right] = [2*currentIdx, 2*currentIdx + 1];
+			currentChildIdx = this.heap[right] && this.heap[right] < this.heap[left] ? right : left;
+		}
+		
+		return root;
+	}	
+}
+
 function solution(scoville, K) {
-    const heapInsert = (arr, element) => {
-        arr.push(element);
-        let elementIdx = arr.length - 1;
-        let parentIdx = Math.floor(elementIdx / 2);
-        
-        while (parentIdx > 0 && arr[parentIdx] > arr[elementIdx]) {
-            [arr[parentIdx], arr[elementIdx]] = [arr[elementIdx], arr[parentIdx]];
-            elementIdx = parentIdx;
-            parentIdx = Math.floor(elementIdx / 2);
-        }
+	const scovilleHeap = new MinHeap();
+	let mixCnt = 0;
 
-        return (arr);
-    };
+	for (const element of scoville)
+		scovilleHeap.heapPush(element);
 
-    const heapDelete = (arr) => {
-        arr[1] = arr.pop();
+	while (scovilleHeap.getHeapSize() > 2 && scovilleHeap.getHeapRoot() < K) {
+		const firstFood = scovilleHeap.heapPop();
+		const secondFood = scovilleHeap.heapPop();
+		const mixedFood = firstFood + (secondFood * 2);
 
-        let elementIdx = 1;
-        let firstChildIdx = elementIdx * 2;
-        let secondChildIdx = (elementIdx * 2) + 1;
-        let smallestIdx;
+		scovilleHeap.heapPush(mixedFood);
+		mixCnt++;
+	}
 
-        while(secondChildIdx <= arr.length - 1) {
-            smallestIdx = arr[firstChildIdx] < arr[secondChildIdx] ? firstChildIdx : secondChildIdx;
-            if (arr[elementIdx] > arr[smallestIdx]) {
-                [arr[elementIdx], arr[smallestIdx]] = [arr[smallestIdx], arr[elementIdx]];
-                elementIdx = smallestIdx;
-                firstChildIdx = elementIdx * 2;
-                secondChildIdx = (elementIdx * 2) + 1;
-            }
-            else
-                break;
-        }
-        return (arr);
-    };
+	return (scovilleHeap.getHeapRoot() >= K ? mixCnt : -1);
 }
