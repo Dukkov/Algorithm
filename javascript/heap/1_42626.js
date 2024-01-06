@@ -27,17 +27,22 @@ class MinHeap {
 
 	heapPop() {
 		const root = this.heap[1];
-		this.heap[1] = this.heap.pop();
 		
-		let currentIdx = 1;
-		let [left, right] = [2*currentIdx, 2*currentIdx + 1];
-		let currentChildIdx = this.heap[right] && this.heap[right] < this.heap[left] ? right : left;
+		if (this.getHeapSize() > 2) {
+			this.heap[1] = this.heap.pop();
 	
-		while (this.heap[currentChildIdx] && this.heap[currentIdx] > this.heap[currentChildIdx]) {
-			[this.heap[currentChildIdx], this.heap[currentIdx]] = [this.heap[currentIdx], this.heap[currentChildIdx]];
-			currentIdx = currentChildIdx;
-			[left, right] = [2*currentIdx, 2*currentIdx + 1];
-			currentChildIdx = this.heap[right] && this.heap[right] < this.heap[left] ? right : left;
+			let currentIdx = 1;
+			let [leftChild, rightChild] = [currentIdx * 2, currentIdx * 2 + 1];
+			let currentChildIdx = this.heap[rightChild] && this.heap[rightChild] < this.heap[leftChild] ? rightChild : leftChild;
+		
+			while (this.heap[currentChildIdx] && this.heap[currentIdx] > this.heap[currentChildIdx]) {
+				[this.heap[currentChildIdx], this.heap[currentIdx]] = [this.heap[currentIdx], this.heap[currentChildIdx]];
+				currentIdx = currentChildIdx;
+				[leftChild, rightChild] = [currentIdx * 2, currentIdx * 2 + 1];
+				currentChildIdx = this.heap[rightChild] && this.heap[rightChild] < this.heap[leftChild] ? rightChild : leftChild;
+			}
+		} else {
+			this.heap.pop();
 		}
 		
 		return root;
