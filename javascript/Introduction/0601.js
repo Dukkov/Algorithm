@@ -33,6 +33,9 @@
 // ---
 
 function solution(array, height) {
-  var answer = 0;
-  return answer;
+  return array.reduce((acc, cur) => {
+    if (cur > height) acc++;
+
+    return acc;
+  }, 0);
 }
