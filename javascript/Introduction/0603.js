@@ -66,6 +66,7 @@
 function solution(polynomial) {
   let coefficient = 0;
   let integer = 0;
+  const answer = [];
   const arr = polynomial.split(' + ');
 
   arr.forEach((val) => {
@@ -78,10 +79,10 @@ function solution(polynomial) {
   });
 
   if (coefficient) {
-    if (coefficient === 1) {
-      if (integer) return `${coefficient}x + ${integer}`;
-    }
+    if (coefficient === 1) answer.push('x');
+    else answer.push(`${coefficient}x`);
+  }
+  if (integer) answer.push(`${integer}`);
 
-    return `${coefficient}x`;
-  } else return `${integer}`;
+  return answer.join(' + ');
 }
