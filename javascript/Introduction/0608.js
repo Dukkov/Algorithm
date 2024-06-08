@@ -38,40 +38,53 @@
 
 // ---
 
-// const range = (size, start) => {
-//   return Array.from({ length: size }, (_, idx) => idx + start);
-// };
-
 // function solution(lines) {
 //   lines.sort((a, b) => a[0] - b[0]);
 //   const overlapSet = new Set();
+//   let start;
+//   let end;
 
 //   for (let i = 0; i < lines.length - 1; i++) {
-//     if (lines[i][1] > lines[i + 1][0]) {
-//       if (lines[i][1] > lines[i + 1][1])
-//         range(lines[i + 1][1] - lines[i + 1][0] + 1, lines[i + 1][0]).forEach(
-//           (val) => overlapSet.add(val)
-//         );
-//       else
-//         range(lines[i][1] - lines[i + 1][0] + 1, lines[i + 1][0]).forEach(
-//           (val) => overlapSet.add(val)
-//         );
+//     if (lines[i][1] >= lines[i + 1][0]) {
+//       start = lines[i + 1][0];
+//       end = lines[i][1] > lines[i + 1][1] ? lines[i + 1][1] : lines[i][1];
+
+//       for (let j = start; j < end; j++) {
+//         overlapSet.add(`${j}, ${j + 1}`);
+//       }
+//     }
+
+//     if (i === 0 && lines[i][1] >= lines[i + 2][1]) {
+//       start = lines[i + 2][0];
+//       end = lines[i + 2][1];
+
+//       for (let j = start; j < end; j++) {
+//         overlapSet.add(`${j}, ${j + 1}`);
+//       }
 //     }
 //   }
 
-
+//   return overlapSet.size;
 // }
 
-function solution(lines) {
-  lines.sort((a, b) => a[0] - b[0]);
-  const overlapSet = new Set();
+// ---
 
-  for (let i = 0; i < lines.length - 1; i++) {
-    if (lines[i][1] > lines[i + 1][0]) {
-      if (lines[i][1] > lines[i + 1][1])
-      else
+const getGCD = (num1, num2) => (num2 > 0 ? getGCD(num2, num1 % num2) : num1);
+
+function solution(a, b) {
+  const gcd = getGCD(a, b);
+  b /= gcd;
+
+  while (true) {
+    if (b % 2 === 0) {
+      b /= 2;
+      continue;
     }
+    if (b % 5 === 0) {
+      b /= 5;
+      continue;
+    }
+
+    return b === 1 ? 1 : 2;
   }
-
-
 }
