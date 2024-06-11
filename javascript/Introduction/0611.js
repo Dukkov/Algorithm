@@ -36,7 +36,24 @@
 
 // ---
 
-function solution(before, after) {
-  var answer = 0;
+// function solution(before, after) {
+//   return before.split('').sort().join('') === after.split('').sort().join('')
+//     ? 1
+//     : 0;
+// }
+
+// ---
+
+function solution(i, j, k) {
+  let answer = 0;
+
+  for (let idx = i; idx <= j; idx++) {
+    if (idx.toString().includes(k.toString())) {
+      answer += idx
+        .toString()
+        .replaceAll(new RegExp(`[^${k.toString()}]`, 'g'), '').length;
+    }
+  }
+
   return answer;
 }
