@@ -56,6 +56,10 @@ class SinglyLinkedList {
       tmp = pre.next.val;
     }
   }
+
+  shift() {}
+
+  unshift() {}
 }
 
 const sll = new SinglyLinkedList();
