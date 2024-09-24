@@ -60,6 +60,10 @@ class SinglyLinkedList {
   shift() {}
 
   unshift() {}
+
+  get() {}
+
+  set() {}
 }
 
 const sll = new SinglyLinkedList();
