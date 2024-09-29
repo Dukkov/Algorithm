@@ -64,6 +64,12 @@ class SinglyLinkedList {
   get() {}
 
   set() {}
+
+  insert() {}
+
+  remove() {}
+
+  reverse() {}
 }
 
 const sll = new SinglyLinkedList();
