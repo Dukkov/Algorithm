@@ -61,9 +61,9 @@ class SinglyLinkedList {
 
   unshift() {}
 
-  get() {}
+  get(num) {}
 
-  set() {}
+  set(num) {}
 
   insert() {}
 
