@@ -65,9 +65,9 @@ class SinglyLinkedList {
 
   set(num) {}
 
-  insert() {}
+  insert(num) {}
 
-  remove() {}
+  remove(num) {}
 
   reverse() {}
 }
