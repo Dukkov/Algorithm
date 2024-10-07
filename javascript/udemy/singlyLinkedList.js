@@ -57,9 +57,21 @@ class SinglyLinkedList {
     }
   }
 
-  shift() {}
+  shift() {
+    this.head = this.next;
+    this.length--;
 
-  unshift() {}
+    return this;
+  }
+
+  unshift(val) {
+    const newNode = new Node(val);
+    newNode.next = this.head;
+    this.head = newNode;
+    this.length++;
+
+    return this;
+  }
 
   get(num) {}
 
